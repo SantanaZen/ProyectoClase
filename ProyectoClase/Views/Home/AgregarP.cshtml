@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!--Estilos-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <!--Scripts-->
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <h1 class="text-left">Agregar Producto</h1>
+    <div class="conteiner col-lg-12">
+        <div class="row justify-content-center">
+            <div class="form-group col-sm-4">
+                <label>Clave del Producto</label>
+                <div>
+                    <input type="text" name="clave" id="clave" class="form-control  required" placeholder="Ingresa la clave del producto">
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>Nombre</label>
+                <div>
+                    <input type="text" name="nombre" id="nombre" class="form-control required" placeholder="Ingresa el nombre del producto">
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>Precio compra</label>
+                <div>
+                    <input type="text" name="precioc" id="precioc" class="form-control required" placeholder="Ingresa el precio compra">
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="form-group col-sm-4">
+                <label>Precio Venta</label>
+                <div>
+                    <input type="text" name="preciov" id="preciov" class="form-control required" placeholder="Ingresa el precio venta">
+                </div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label>Cantidad</label>
+                <div>
+                    <input type="text" name="cantidad" id="cantidad" class="form-control required" placeholder="Ingresa la cantidad de productos">
+                </div>
+            </div>           
+        </div>
+        
+        <div class="col-md-12">
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Registrar" id="btn-registrar" class="btn btn-primary col-10">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

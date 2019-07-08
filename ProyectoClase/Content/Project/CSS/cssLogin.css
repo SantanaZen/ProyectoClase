@@ -1,0 +1,43 @@
+﻿.dvLogeo{
+    background-color:black;
+    border-radius: .4rem;
+    height:39rem;
+    width:36rem;
+    margin:0 auto;
+}
+.ulCompLogeo li{
+    display:block;
+    margin-top:15%;
+}
+.ulCompLogeo{
+    margin:0px;
+    padding:0px;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 10%;
+    text-align: center;
+    
+}
+
+img{
+    width: 4rem;
+}
+
+#hBienv{
+    color: #ffffff;
+}
+.secSuperior{
+    text-align: center;
+    color:#ffffff;
+
+}
+
+.secCentral{
+    margin:0 auto;
+    margin-top:5%;
+    margin-bottom:5%;
+}
+
+body {
+    background-image: url('../img/fondo.png');
+}

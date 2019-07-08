@@ -1,0 +1,52 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <!--Estilos-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Project/CSS/cssLogin.css" rel="stylesheet" />
+    <!--Scripts-->
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/Project/JS/jsLogin.js"></script>
+
+</head>
+<body>
+    <section class="secSuperior">
+        <h1>Sistema de clase MVC
+            <img src="~/Content/Project/img/logo.png" />
+        </h1>
+
+    </section>
+            <section class="container secCentral">
+                <div class="row dvLogeo">
+                    <ul class="ulCompLogeo">
+                        <li>
+                            <h3 id="hBienv">Bienvenido</h3>
+                        </li>
+                        <li>
+                            <input type="text"  class="form-control" placeholder="Usuario" id="inUsuario"/>
+                        </li>
+                        <li>
+                            <input type="text" class="form-control" placeholder="Contraseña" id="inContra" maxlength="20" required />
+                        </li>
+                        <li>
+                            <button class="btn btn-primary form-control btnLogear" >Aceptar</button>
+                        </li>
+                    </ul>
+
+                </div>
+            </section>
+        <section class="secPie">
+        </section>
+        <input  type="hidden" id="urlHome" value="@Url.Action("Index","Home")"/>
+        <input type="hidden" id="urlLogeo" value="@Url.Action("Logeo","Login")" />
+</body>
+</html>

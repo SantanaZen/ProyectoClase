@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Modelo.ProductosModel>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Home</title>
+    <!--Estilos-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Project/CSS/cssHome.css" rel="stylesheet" />
+    <!--Scripts-->
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/Project/JS/jsHome.js"></script>
+</head>
+<body>
+
+    <div class="nav navbar-right">
+        <button class="btn btn-primary form-control btnLogout">Salir</button>
+
+        <input type="hidden" id="urlLogin" value="@Url.Action("Index", "Login")" />
+    </div>
+    <div class="col-lg-10 text-center dvTitle">
+        Los productos con los que contamos estan en la siguiente tabla
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.iCveProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sNombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DPrecioCompra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dPrecioVenta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.iStock)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.iCveProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sNombre)
+                </td>
+                <td>
+                   $ @Html.DisplayFor(modelItem => item.DPrecioCompra)
+                </td>
+                <td>
+                   $ @Html.DisplayFor(modelItem => item.dPrecioVenta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.iStock)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+</body>
+</html>
+
+
