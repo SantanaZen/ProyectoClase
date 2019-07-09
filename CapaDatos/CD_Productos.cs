@@ -36,6 +36,7 @@ namespace CapaDatos
 
                 return contexto.Productos.Select(producto => new ProductosModel()
                 {
+                    iCveProducto = producto.CveProducto,
                     sNombre = producto.Nombre,
                     DPrecioCompra = producto.PrecioCompra,
                     dPrecioVenta = producto.PrecioVenta,

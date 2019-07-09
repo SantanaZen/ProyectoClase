@@ -26,9 +26,15 @@
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Agregar Productos", "AgregarP", "Home")</li>
                     <li>@Html.ActionLink("Venta producto", "VentaP", "Home")</li>
-                    <li>@Html.ActionLink("Agregar Usuario", "AgregarU", "Home")</li>
+                    <li>@Html.ActionLink("Agregar Usuario", "AgregarU", "Home")</li>                    
                 </ul>              
+                <div class="nav navbar-right">
+                    <button class="btn btn-primary form-control btnLogout" style="margin-top:10px">Cerrar sesión   
+                        <span class="glyphicon glyphicon-log-in"></span>
+                    </button>
 
+                    <input type="hidden" id="urlLogin" value="@Url.Action("Logout", "Login")" />
+                </div>
 
             </div>
         </div>
@@ -42,7 +48,8 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap") 
+    <script src="~/Scripts/Project/JS/jsLogout.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

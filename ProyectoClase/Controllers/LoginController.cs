@@ -34,6 +34,12 @@ namespace ProyectoClase.Controllers
                 resultado["Advertencia"] = true;
             return Content(resultado.ToString());
         }
-       
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Abandon();
+            return RedirectToRoute(new { controller = "Login", action = "Index" });
+        }
+
     }
 }

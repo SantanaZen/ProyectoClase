@@ -14,16 +14,19 @@ namespace ProyectoClase.Controllers
        
         public ActionResult Index()
         {
-            if ((CD_Usuario)Session["usuario"]!=null)
-            {
-                CD_Productos productos = new CD_Productos();
-                List<ProductosModel> listaP = new List<ProductosModel>();
-                listaP = productos.ListaProductos();
-                return View(listaP);
-
+            if ((CD_Usuario)Session["usuario"]!=null)           {
+                
+                return View();
             }
             return RedirectToRoute(new { controller = "Login", action = "Index" });
 
+        }
+        public ActionResult GetList()
+        {
+            CD_Productos productos = new CD_Productos();
+            List<ProductosModel> listaP = new List<ProductosModel>();
+            listaP = productos.ListaProductos();
+            return Json(new { data = listaP }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult About()

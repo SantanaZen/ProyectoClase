@@ -1,11 +1,26 @@
-﻿$(document).on('click', '.btnLogout', function () {
-    
-    cerrarSesion();
+﻿$(document).ready(function () {       
+  
+   dtProductos();
 
 });
-function cerrarSesion() {
-    Session.remove["usuario"];
-    var url = $('#urlLogin').val();
-    window.location.href = url;
-    
+
+function dtProductos() {
+    var url = $('#urlListaData').val();
+    $('#example').DataTable({
+        
+        ajax: {
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "GET"            
+        },
+        columns: [
+            { "data": "iCveProducto" },
+            { "data": "sNombre" },
+            { "data": "DPrecioCompra" },
+            { "data": "dPrecioVenta" },
+            { "data": "iStock" }
+        ]
+    });
+
 }
