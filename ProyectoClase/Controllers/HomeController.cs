@@ -63,6 +63,14 @@ namespace ProyectoClase.Controllers
 
             return View();
         }
+        public ActionResult AgregarUnside()
+        {
+            ViewBag.Message = "Your agregarU page.";
+
+            return View();
+        }
+
+
 
     }
 }
