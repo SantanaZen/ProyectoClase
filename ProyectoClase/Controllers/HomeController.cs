@@ -1,5 +1,6 @@
 ﻿using CapaDatos;
 using Modelo;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,36 +42,60 @@ namespace ProyectoClase.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            if ((CD_Usuario)Session["usuario"] != null)
+            {
+                ViewBag.Message = "Your contact page.";
 
-            return View();
+                return View();
+            }
+            return RedirectToRoute(new { controller = "Login", action = "Index" });
         }
         public ActionResult AgregarP()
         {
-            ViewBag.Message = "Your agregarP page.";
+            if ((CD_Usuario)Session["usuario"] != null)
+            {
+                ViewBag.Message = "Your agregarP page.";
 
-            return View();
+                return View();
+            }
+            return RedirectToRoute(new { controller = "Login", action = "Index" });
+
         }
         public ActionResult VentaP()
         {
-            ViewBag.Message = "Your ventaP page.";
+            if ((CD_Usuario)Session["usuario"] != null)
+            {
+                ViewBag.Message = "Your ventaP page.";
 
-            return View();
+                return View();
+            }
+
+            return RedirectToRoute(new { controller = "Login", action = "Index" });
         }
         public ActionResult AgregarU()
         {
-            ViewBag.Message = "Your agregarU page.";
-
-            return View();
+            if ((CD_Usuario)Session["usuario"] != null)
+            {
+                ViewBag.Message = "Your agregarU page.";
+                return View();
+            }
+            return RedirectToRoute(new { controller = "Login", action = "Index" });
         }
-        public ActionResult AgregarUnside()
+
+        [HttpPost]
+        public ActionResult recibeDatos(UsuarioModel nuevoUsuario)
         {
-            ViewBag.Message = "Your agregarU page.";
+            var resultado = new JObject();
 
-            return View();
+            CD_Usuario user = new CD_Usuario();
+            if (user.NuevoUsuario(nuevoUsuario) != 0)
+            {                
+                resultado["Exito"] = true;
+            }
+            else
+                resultado["Advertencia"] = true;
+            return Content(resultado.ToString());
         }
-
-
-
     }
+       
 }

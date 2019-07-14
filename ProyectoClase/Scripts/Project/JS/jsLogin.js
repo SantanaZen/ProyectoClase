@@ -8,7 +8,7 @@
     checkInput('#inContra', passExpresion);
     $('.btnLogear').on('click', function () {
         validador();
-    })
+    });
     
 
 });
@@ -53,7 +53,7 @@ function LlamadaIniciarSesion(datosUsuario) {
         async: true,
         success: SuccessLlamadaIniciarSesion,
         error: function (xmlHttpRequest, textStatus, errorThrown) {
-            alert("error ", data.Mensaje, "verificar info");
+            alert("error ", data.Mensaje,"verificar info");
         }
     });
 }

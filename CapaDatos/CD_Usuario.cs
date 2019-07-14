@@ -36,5 +36,30 @@ namespace CapaDatos
             }
                 
         }
+
+        public int NuevoUsuario(UsuarioModel user)
+        {
+            using (var contexto = new BDProyectoMVCEntities())
+            {
+                var iExiste = contexto.Usuario.Where(u => u.Correo == user.sCorreo && u.Usuario1 == user.sUsuario).FirstOrDefault();
+                if (iExiste != null)
+                    return 0;
+                var usuarioNuevo = new Usuario
+                {
+                    Usuario1 = user.sUsuario,
+                    Contraseña = user.sContraseña,
+                    App = user.sApp,
+                    Apm = user.sApm,
+                    Correo = user.sCorreo,
+                    Nombre = user.sNombre,
+                    FechaNacimiento = user.dtFechaNacimiento
+                };
+                contexto.Usuario.Add(usuarioNuevo);
+                contexto.SaveChanges();
+            }
+            
+            return 1;
+        }
+        
     }
 }

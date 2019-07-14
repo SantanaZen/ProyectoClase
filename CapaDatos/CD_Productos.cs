@@ -45,5 +45,24 @@ namespace CapaDatos
                 }).ToList();
 
         }
+
+        public List<ProductosModel> ListaProductosCategoria(int categoria)
+        {
+
+            using (var contexto = new BDProyectoMVCEntities())
+
+                return contexto.Productos.Where(producto => producto.Categoria == categoria).Select(producto => new ProductosModel()
+                {
+                    iCveProducto = producto.CveProducto,
+                    sNombre = producto.Nombre,
+                    DPrecioCompra = producto.PrecioCompra,
+                    dPrecioVenta = producto.PrecioVenta,
+                    iStock = producto.Stock
+
+                }).ToList();
+
+        }
+
+
     }
 }

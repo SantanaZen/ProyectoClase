@@ -7,6 +7,11 @@
       <Diagram DiagramId="e9922632b86d4ea1a0495dc617f62e43" Name="Diagram1">
         <EntityTypeShape EntityType="BDProyectoMVCModel.Productos" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BDProyectoMVCModel.Usuario" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BDProyectoMVCModel.Categorias" Width="1.5" PointX="0.75" PointY="5.125" />
+        <EntityTypeShape EntityType="BDProyectoMVCModel.Clientes" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BDProyectoMVCModel.DetalleVenta" Width="1.5" PointX="3" PointY="4" />
+        <AssociationConnector Association="BDProyectoMVCModel.FK__Productos__Categ__24927208" />
+        <AssociationConnector Association="BDProyectoMVCModel.FK__DetalleVe__Id_pr__29572725" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -5,6 +5,35 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BDProyectoMVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Categoria" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Estatus" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="ID_Clientes" />
+          </Key>
+          <Property Name="ID_Clientes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="100" />
+          <Property Name="Correo" Type="varchar" MaxLength="45" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_nac" Type="date" />
+        </EntityType>
+        <EntityType Name="DetalleVenta">
+          <Key>
+            <PropertyRef Name="ID_Detalle" />
+          </Key>
+          <Property Name="ID_Detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_producto" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="money" Nullable="false" />
+        </EntityType>
         <EntityType Name="Productos">
           <Key>
             <PropertyRef Name="CveProducto" />
@@ -14,6 +43,7 @@
           <Property Name="PrecioCompra" Type="money" Nullable="false" />
           <Property Name="PrecioVenta" Type="money" Nullable="false" />
           <Property Name="Stock" Type="int" Nullable="false" />
+          <Property Name="Categoria" Type="int" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -27,9 +57,44 @@
           <Property Name="FechaNacimiento" Type="datetime" />
           <Property Name="Correo" Type="varchar" MaxLength="320" Nullable="false" />
         </EntityType>
+        <Association Name="FK__DetalleVe__Id_pr__29572725">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="1" />
+          <End Role="DetalleVenta" Type="Self.DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="CveProducto" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="Id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Productos__Categ__24927208">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BDProyectoMVCModelStoreContainer">
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleVenta" EntityType="Self.DetalleVenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DetalleVe__Id_pr__29572725" Association="Self.FK__DetalleVe__Id_pr__29572725">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Productos__Categ__24927208" Association="Self.FK__Productos__Categ__24927208">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -44,10 +109,24 @@
           <Property Name="PrecioCompra" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="PrecioVenta" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Stock" Type="Int32" Nullable="false" />
+          <Property Name="Categoria" Type="Int32" />
+          <NavigationProperty Name="Categorias" Relationship="BDProyectoMVCModel.FK__Productos__Categ__24927208" FromRole="Productos" ToRole="Categorias" />
+          <NavigationProperty Name="DetalleVenta" Relationship="BDProyectoMVCModel.FK__DetalleVe__Id_pr__29572725" FromRole="Productos" ToRole="DetalleVenta" />
         </EntityType>
         <EntityContainer Name="BDProyectoMVCEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Productos" EntityType="Self.Productos" />
           <EntitySet Name="Usuario" EntityType="BDProyectoMVCModel.Usuario" />
+          <EntitySet Name="Categorias" EntityType="BDProyectoMVCModel.Categorias" />
+          <EntitySet Name="Clientes" EntityType="BDProyectoMVCModel.Clientes" />
+          <EntitySet Name="DetalleVenta" EntityType="BDProyectoMVCModel.DetalleVenta" />
+          <AssociationSet Name="FK__Productos__Categ__24927208" Association="BDProyectoMVCModel.FK__Productos__Categ__24927208">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetalleVe__Id_pr__29572725" Association="BDProyectoMVCModel.FK__DetalleVe__Id_pr__29572725">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -61,6 +140,61 @@
           <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
           <Property Name="Correo" Type="String" Nullable="false" MaxLength="320" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Categoria" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Estatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Productos" Relationship="BDProyectoMVCModel.FK__Productos__Categ__24927208" FromRole="Categorias" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="ID_Clientes" />
+          </Key>
+          <Property Name="ID_Clientes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_nac" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="DetalleVenta">
+          <Key>
+            <PropertyRef Name="ID_Detalle" />
+          </Key>
+          <Property Name="ID_Detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_producto" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="PrecioUnitario" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Productos" Relationship="BDProyectoMVCModel.FK__DetalleVe__Id_pr__29572725" FromRole="DetalleVenta" ToRole="Productos" />
+        </EntityType>
+        <Association Name="FK__Productos__Categ__24927208">
+          <End Type="BDProyectoMVCModel.Categorias" Role="Categorias" Multiplicity="0..1" />
+          <End Type="BDProyectoMVCModel.Productos" Role="Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetalleVe__Id_pr__29572725">
+          <End Type="BDProyectoMVCModel.Productos" Role="Productos" Multiplicity="1" />
+          <End Type="BDProyectoMVCModel.DetalleVenta" Role="DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="CveProducto" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="Id_producto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -70,6 +204,7 @@
           <EntitySetMapping Name="Productos">
             <EntityTypeMapping TypeName="BDProyectoMVCModel.Productos">
               <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
                 <ScalarProperty Name="CveProducto" ColumnName="CveProducto" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="PrecioCompra" ColumnName="PrecioCompra" />
@@ -88,6 +223,38 @@
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
                 <ScalarProperty Name="Usuario1" ColumnName="Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="BDProyectoMVCModel.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="BDProyectoMVCModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="Fecha_nac" ColumnName="Fecha_nac" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID_Clientes" ColumnName="ID_Clientes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleVenta">
+            <EntityTypeMapping TypeName="BDProyectoMVCModel.DetalleVenta">
+              <MappingFragment StoreEntitySet="DetalleVenta">
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Id_producto" ColumnName="Id_producto" />
+                <ScalarProperty Name="ID_Detalle" ColumnName="ID_Detalle" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

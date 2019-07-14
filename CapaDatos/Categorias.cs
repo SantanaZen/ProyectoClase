@@ -12,23 +12,19 @@ namespace CapaDatos
     using System;
     using System.Collections.Generic;
     
-    public partial class Productos
+    public partial class Categorias
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Productos()
+        public Categorias()
         {
-            this.DetalleVenta = new HashSet<DetalleVenta>();
+            this.Productos = new HashSet<Productos>();
         }
     
-        public int CveProducto { get; set; }
-        public string Nombre { get; set; }
-        public decimal PrecioCompra { get; set; }
-        public decimal PrecioVenta { get; set; }
-        public int Stock { get; set; }
-        public Nullable<int> Categoria { get; set; }
+        public int ID { get; set; }
+        public string Categoria { get; set; }
+        public string Estatus { get; set; }
     
-        public virtual Categorias Categorias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleVenta> DetalleVenta { get; set; }
+        public virtual ICollection<Productos> Productos { get; set; }
     }
 }

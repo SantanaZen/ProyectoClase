@@ -19,6 +19,7 @@ namespace Modelo
         public decimal dPrecioVenta { get; set; }
         [Display(Name = "Stock")]
         public int iStock { get; set; }
+        public int Categoria { get; set; }
        
     }
 }
