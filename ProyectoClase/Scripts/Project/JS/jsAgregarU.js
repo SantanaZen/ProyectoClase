@@ -4,6 +4,11 @@
         validarCampos();
     });
 
+    $('#nacimiento').datepicker({
+        format: "yyyy-mm-dd",
+        language: "es",
+        autoclose: true
+    });
 
 });
 
@@ -46,12 +51,11 @@ function LlamadaEnviarDatos(nuevoUsuario) {
 }
 function SuccessLlamadaEnviarDatos(data) {
     if (data.Exito) {
-        var url = $('#urlAgregarU').val();
         alert("Datos agregados Correctamente");
-        window.location.href = url;
+        window.location.reload();
     }
     else if (data.Advertencia) {
-        alert("Advertencia, el usuario ya existe");
+        alert("Advertencia, el usuario o correo ya existe");
 
     }
     else {

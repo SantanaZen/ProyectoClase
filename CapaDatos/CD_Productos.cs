@@ -63,6 +63,44 @@ namespace CapaDatos
 
         }
 
+        public int NuevoProducto(ProductosModel producto)
+        {
+            using (var contexto = new BDProyectoMVCEntities())
+            {
+                var e = contexto.Productos.Where(p => p.CveProducto == producto.iCveProducto).FirstOrDefault();
+                if (e != null)
+                    return 0;
+                var nuevoProducto = new Productos
+                {
+                    CveProducto = producto.iCveProducto,
+                    Nombre = producto.sNombre,
+                    PrecioCompra = producto.DPrecioCompra,
+                    PrecioVenta = producto.dPrecioVenta,
+                    Stock = producto.iStock
+                };
+                contexto.Productos.Add(nuevoProducto);
+                contexto.SaveChanges();
+            }
+            return 1;
+        }     
+        
+        public int ActualizarProducto(ProductosModel producto)
+        {
+            using (var contexto = new BDProyectoMVCEntities())
+            {
+                var p = contexto.Productos.Where(prod => prod.CveProducto == producto.iCveProducto).FirstOrDefault();
 
+                if(p != null)
+                {
+                    p.Nombre = producto.sNombre;
+                    p.PrecioCompra = producto.DPrecioCompra;
+                    p.PrecioVenta = producto.dPrecioVenta;
+                    p.Stock = producto.iStock;
+                }
+                contexto.SaveChanges();
+            }
+            return 1;
+
+        }
     }
 }

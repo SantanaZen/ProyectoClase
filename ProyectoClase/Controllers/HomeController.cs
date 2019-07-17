@@ -96,6 +96,28 @@ namespace ProyectoClase.Controllers
                 resultado["Advertencia"] = true;
             return Content(resultado.ToString());
         }
+        [HttpPost]
+        public ActionResult recibeProducto(ProductosModel nuevoProducto)
+        {
+            var r = new JObject();
+            CD_Productos p = new CD_Productos();
+            if (p.NuevoProducto(nuevoProducto) != 0)
+                r["Exito"] = true;
+            else
+                r["Advertencia"] = true;
+            return Content(r.ToString());
+        }
+        [HttpPost]
+        public ActionResult actualizaProducto(ProductosModel producto)
+        {
+            var r = new JObject();
+            CD_Productos p = new CD_Productos();
+            if (p.ActualizarProducto(producto) == 1)
+                r["Exito"] = true;
+            else
+                r["Advertencia"] = true;
+            return Content(r.ToString());
+        }
     }
        
 }

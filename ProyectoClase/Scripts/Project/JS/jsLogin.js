@@ -63,7 +63,7 @@ function SuccessLlamadaIniciarSesion(data) {
         window.location.href = url;
     }
     else if (data.Advertencia) {
-        alert("advertencia");
+        alert("Usuario o contraseña incorrectos");
 
     }
     else {
@@ -80,7 +80,7 @@ function inputCheck(idInput) {
             || (tecla.charCode >= 64 && tecla.charCode <= 90)
             || (tecla.charCode >= 64 && tecla.charCode <= 90)
             || (tecla.charCode >= 97 && tecla.charCode <= 122)
-            || tecla.charCode == 95
+            || tecla.charCode === 95
             || (tecla.charCode >= 160 && tecla.charCode <= 165)) return true;
         else return false;
     })

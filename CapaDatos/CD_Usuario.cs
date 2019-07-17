@@ -19,7 +19,7 @@ namespace CapaDatos
                 if(iExiste > 0)
                 {
                     user = contexto.Usuario.Where(u => u.Usuario1 == user.sUsuario &&
-                u.Contraseña == user.sContraseña).Select(usu => new UsuarioModel()
+                    u.Contraseña == user.sContraseña).Select(usu => new UsuarioModel()
                 {
                     sUsuario = usu.Usuario1,
                     sContraseña = usu.Contraseña,
@@ -41,7 +41,7 @@ namespace CapaDatos
         {
             using (var contexto = new BDProyectoMVCEntities())
             {
-                var iExiste = contexto.Usuario.Where(u => u.Correo == user.sCorreo && u.Usuario1 == user.sUsuario).FirstOrDefault();
+                var iExiste = contexto.Usuario.Where(u => u.Correo == user.sCorreo || u.Usuario1 == user.sUsuario).FirstOrDefault();
                 if (iExiste != null)
                     return 0;
                 var usuarioNuevo = new Usuario
